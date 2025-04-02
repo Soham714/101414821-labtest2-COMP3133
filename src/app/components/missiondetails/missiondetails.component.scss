@@ -1,0 +1,236 @@
+// Variables
+$primary-color: #1976d2;
+$accent-color: #7b1fa2;
+$success-color: #2e7d32;
+$error-color: #d32f2f;
+$text-primary: #333;
+$text-secondary: #666;
+$background-light: #f8f9fa;
+$card-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+$transition-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+@use "sass:color";
+
+// Mission Card
+.mission-card {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: $card-shadow;
+  overflow: hidden;
+  transition: $transition-standard;
+  
+  &:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+  }
+}
+
+// Header and Image
+.mission-header {
+  background: linear-gradient(135deg, color.adjust($primary-color, $lightness: 20%), $primary-color);
+  padding: 2rem 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mission-patch {
+  height: 140px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: $transition-standard;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// Title and Subtitle
+.mission-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: $primary-color;
+  margin: 1.5rem 0 0.5rem;
+  padding: 0 1.5rem;
+  
+  .year {
+    font-weight: 500;
+    opacity: 0.8;
+  }
+}
+
+.mission-subtitle {
+  text-align: center;
+  font-weight: 500;
+  color: $text-secondary;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
+  
+  .rocket-icon {
+    margin-right: 0.5rem;
+  }
+}
+
+.divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.12);
+  margin: 0 1.5rem;
+}
+
+// Content
+.mission-content {
+  padding: 1.5rem;
+}
+
+// Info Grid
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: $text-secondary;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.value {
+  font-size: 1.1rem;
+  color: $text-primary;
+  font-weight: 500;
+}
+
+// Status Badges
+.status-badge {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0.25rem 0.75rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  
+  &.success {
+    background-color: rgba($success-color, 0.15);
+    color: $success-color;
+  }
+  
+  &.failure {
+    background-color: rgba($error-color, 0.15);
+    color: $error-color;
+  }
+}
+
+// Details Section
+.details-section {
+  margin: 2rem 0;
+}
+
+.details-title {
+  font-size: 1.25rem;
+  color: $text-primary;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 0.5rem;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: $primary-color;
+  }
+}
+
+.details-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: $text-primary;
+}
+
+// Links
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  
+  a {
+    padding: 0.5rem 1.25rem;
+    border-radius: 24px;
+    font-weight: 500;
+    transition: $transition-standard;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .link-icon {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+// Back Button
+.back-btn {
+  text-align: center;
+  margin-top: 1.5rem;
+  
+  button {
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    color: $primary-color;
+    transition: $transition-standard;
+    
+    &:hover {
+      background-color: rgba($primary-color, 0.1);
+    }
+    
+    .back-icon {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+// Media Queries
+@media (max-width: 768px) {
+  .mission-title {
+    font-size: 1.5rem;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .links {
+    flex-direction: column;
+    align-items: stretch;
+    
+    a {
+      text-align: center;
+    }
+  }
+}

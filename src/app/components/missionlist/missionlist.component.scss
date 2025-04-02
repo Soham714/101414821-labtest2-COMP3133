@@ -1,0 +1,314 @@
+// Variables
+$primary-color: #005288;
+$accent-color: #ff4500;
+$light-gray: #f9f9f9;
+$dark-gray: #444444;
+$card-radius: 16px;
+$transition-speed: 0.3s;
+
+// Main Container
+.spacex-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+// Page Title
+.page-title {
+  text-align: center;
+  color: $primary-color;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  font-size: 2.5rem;
+  
+  .rocket-icon {
+    display: inline-block;
+    transform: rotate(45deg);
+    margin-right: 0.5rem;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { transform: rotate(45deg) scale(1); }
+    50% { transform: rotate(45deg) scale(1.1); }
+    100% { transform: rotate(45deg) scale(1); }
+  }
+}
+
+// Filter Section
+.filter-section {
+  margin-bottom: 2rem;
+  
+  .filter-toggle {
+    display: block;
+    margin: 0 auto 1rem;
+    background-color: $primary-color;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: background-color $transition-speed ease;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+  
+  .filter-panel {
+    background-color: $light-gray;
+    border-radius: $card-radius;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    
+    .filter-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .form-field {
+      width: 100%;
+      
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: $dark-gray;
+      }
+      
+      input, select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+          box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+        }
+      }
+    }
+    
+    .filter-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      
+      button {
+        padding: 0.75rem 1.5rem;
+        border-radius: 30px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all $transition-speed ease;
+      }
+      
+      .apply-btn {
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        
+        &:hover {
+          background-color: darken($primary-color, 10%);
+          transform: translateY(-2px);
+        }
+      }
+      
+      .clear-btn {
+        background-color: white;
+        color: $dark-gray;
+        border: 1px solid #ddd;
+        
+        &:hover {
+          background-color: #f2f2f2;
+          color: $accent-color;
+        }
+      }
+    }
+  }
+}
+
+// Mission Cards
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.mission-card {
+  background-color: white;
+  border-radius: $card-radius;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform $transition-speed ease, box-shadow $transition-speed ease;
+  
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-image-container {
+    background-color: $light-gray;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+    
+    img {
+      max-height: 120px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+  }
+  
+  .card-content {
+    padding: 1.5rem;
+  }
+  
+  .mission-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: $primary-color;
+  }
+  
+  .mission-subtitle {
+    font-size: 1rem;
+    color: $dark-gray;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    
+    .rocket-type {
+      display: inline-block;
+      background-color: $light-gray;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-left: 0.5rem;
+    }
+  }
+  
+  .mission-details {
+    color: $dark-gray;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    max-height: 100px;
+    overflow: hidden;
+    position: relative;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 30px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+    }
+  }
+  
+  .card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .view-btn {
+      background-color: $accent-color;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all $transition-speed ease;
+      
+      &:hover {
+        background-color: darken($accent-color, 10%);
+        transform: translateY(-2px);
+      }
+    }
+    
+    .mission-status {
+      display: flex;
+      align-items: center;
+      
+      .status-indicator {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+      }
+      
+      .success {
+        background-color: #28a745;
+      }
+      
+      .failure {
+        background-color: #dc3545;
+      }
+      
+      .unknown {
+        background-color: #6c757d;
+      }
+    }
+  }
+}
+
+// Loading State
+.loading-container {
+  text-align: center;
+  padding: 3rem 0;
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba($primary-color, 0.2);
+    border-top-color: $primary-color;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+}
+
+// No Results Message
+.no-results {
+  text-align: center;
+  padding: 3rem 0;
+  font-size: 1.2rem;
+  color: $dark-gray;
+  
+  .sad-emoji {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+}
+
+// Responsive Adjustments
+@media (max-width: 768px) {
+  .mission-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-form {
+    grid-template-columns: 1fr;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+}

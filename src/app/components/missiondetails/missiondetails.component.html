@@ -1,0 +1,77 @@
+<ng-container *ngIf="mission">
+    <mat-card class="mission-card">
+      <div class="mission-header">
+        <img
+          class="mission-patch"
+          [src]="mission.links.mission_patch_small"
+          alt="{{ mission.mission_name }}"
+        />
+      </div>
+  
+      <mat-card-title class="mission-title">
+        {{ mission.mission_name }} <span class="year">{{ mission.launch_year }}</span>
+      </mat-card-title>
+  
+      <mat-card-subtitle class="mission-subtitle">
+        <span class="rocket-icon">🚀</span> {{ mission.rocket.rocket_name }} / {{ mission.rocket.rocket_type }}
+      </mat-card-subtitle>
+  
+      <div class="divider"></div>
+  
+      <mat-card-content class="mission-content">
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Flight Number</span>
+            <span class="value">{{ mission.flight_number }}</span>
+          </div>
+  
+          <div class="info-item">
+            <span class="label">Launch Status</span>
+            <span class="value status-badge" [ngClass]="mission.launch_success ? 'success' : 'failure'">
+              {{ mission.launch_success ? 'Successful' : 'Failed' }}
+            </span>
+          </div>
+  
+          <div class="info-item">
+            <span class="label">Landing Status</span>
+            <span class="value status-badge" [ngClass]="getLandingStatus() ? 'success' : 'failure'">
+              {{ getLandingStatus() ? 'Successful' : 'Failed' }}
+            </span>
+          </div>
+  
+          <div class="info-item">
+            <span class="label">Landing Vehicle</span>
+            <span class="value">{{ mission.rocket.first_stage.cores[0].landing_vehicle || 'N/A' }}</span>
+          </div>
+  
+          <div class="info-item">
+            <span class="label">Landing Type</span>
+            <span class="value">{{ mission.rocket.first_stage.cores[0].landing_type || 'N/A' }}</span>
+          </div>
+        </div>
+  
+        <div class="details-section">
+          <h3 class="details-title">Mission Details</h3>
+          <p class="details-text">{{ mission.details || 'No details available.' }}</p>
+        </div>
+  
+        <div class="links">
+          <a *ngIf="mission.links.article_link" mat-flat-button color="primary" [href]="mission.links.article_link" target="_blank">
+            <span class="link-icon">📄</span> Article
+          </a>
+          <a *ngIf="mission.links.wikipedia" mat-flat-button color="accent" [href]="mission.links.wikipedia" target="_blank">
+            <span class="link-icon">🧠</span> Wikipedia
+          </a>
+          <a *ngIf="mission.links.video_link" mat-flat-button color="warn" [href]="mission.links.video_link" target="_blank">
+            <span class="link-icon">🎥</span> Watch Launch
+          </a>
+        </div>
+  
+        <div class="back-btn">
+          <button mat-button routerLink="/">
+            <span class="back-icon">←</span> Back to Missions
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>

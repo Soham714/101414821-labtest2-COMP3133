@@ -1,0 +1,38 @@
+<mat-form-field appearance="fill">
+    <mat-label>Launch Year</mat-label>
+    <input matInput [(ngModel)]="year" placeholder="e.g. 2020">
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Launch Success</mat-label>
+    <mat-select [(ngModel)]="launchSuccess">
+      <mat-option value="">Any</mat-option>
+      <mat-option value="true">Success</mat-option>
+      <mat-option value="false">Failure</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Landing Success</mat-label>
+    <mat-select [(ngModel)]="landSuccess">
+      <mat-option value="">Any</mat-option>
+      <mat-option value="true">Success</mat-option>
+      <mat-option value="false">Failure</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <div style="text-align: center; margin-top: 1rem;">
+    <button mat-raised-button color="primary" (click)="filterMissions()">Filter</button>
+    <button mat-stroked-button color="warn" (click)="clearFilters()">Clear</button>
+  </div>
+  
+  <app-missionlist
+    *ngIf="filteredMissions.length > 0"
+    [launches]="filteredMissions">
+  </app-missionlist>
+  
+  <p *ngIf="filteredMissions.length === 0 && (year || launchSuccess || landSuccess)"
+     style="text-align:center; margin-top: 2rem; color: #666;">
+     No launches found with selected filters.
+  </p>
+  

@@ -1,0 +1,91 @@
+<div class="spacex-container">
+    <!-- Page Title -->
+    <h1 class="page-title"><span class="rocket-icon">🚀</span> SpaceX Missions-101414821</h1>
+  
+    <!-- Filter Section -->
+    <div class="filter-section">
+      <button class="filter-toggle" (click)="toggleFilter()">
+        {{ showFilter ? 'Hide Filters' : 'Show Filters' }}
+      </button>
+  
+      <div class="filter-panel" *ngIf="showFilter">
+        <div class="filter-form">
+          <div class="form-field">
+            <label for="year">Launch Year</label>
+            <input id="year" type="text" [(ngModel)]="year" placeholder="e.g. 2020">
+          </div>
+  
+          <div class="form-field">
+            <label for="launchSuccess">Launch Success</label>
+            <select id="launchSuccess" [(ngModel)]="launchSuccess">
+              <option value="">Any</option>
+              <option value="true">Success</option>
+              <option value="false">Failure</option>
+            </select>
+          </div>
+  
+          <div class="form-field">
+            <label for="landSuccess">Landing Success</label>
+            <select id="landSuccess" [(ngModel)]="landSuccess">
+              <option value="">Any</option>
+              <option value="true">Success</option>
+              <option value="false">Failure</option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="filter-actions">
+          <button class="apply-btn" (click)="applyFilters()">Apply Filters</button>
+          <button class="clear-btn" (click)="clearFilters()">Clear Filters</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Loading State -->
+    <div class="loading-container" *ngIf="isLoading">
+      <div class="spinner"></div>
+      <p>Loading SpaceX missions...</p>
+    </div>
+  
+    <!-- No Results Message -->
+    <div class="no-results" *ngIf="!isLoading && launches.length === 0">
+      <span class="sad-emoji">😕</span>
+      <p>No missions found matching your criteria.</p>
+      <button class="clear-btn" (click)="clearFilters()">Clear Filters</button>
+    </div>
+  
+    <!-- Mission Cards Grid -->
+    <div class="mission-grid" *ngIf="!isLoading && launches.length > 0">
+      <div class="mission-card" *ngFor="let mission of launches">
+        <div class="card-image-container">
+          <img [src]="mission.links.mission_patch_small || 'assets/placeholder.png'" alt="Mission patch for {{ mission.mission_name }}">
+        </div>
+        
+        <div class="card-content">
+          <h2 class="mission-title">{{ mission.mission_name }} ({{ mission.launch_year }})</h2>
+          
+          <div class="mission-subtitle">
+            {{ mission.rocket.rocket_name }}
+            <span class="rocket-type">{{ mission.rocket.rocket_type }}</span>
+          </div>
+          
+          <div class="mission-details">
+            {{ mission.details || 'No details available for this mission.' }}
+          </div>
+          
+          <div class="card-actions">
+            <button class="view-btn" (click)="viewDetails(mission.flight_number)">View Details</button>
+            
+            <div class="mission-status">
+              <span class="status-indicator" 
+                    [ngClass]="{'success': mission.launch_success, 
+                               'failure': mission.launch_success === false,
+                               'unknown': mission.launch_success === null}">
+              </span>
+              {{ mission.launch_success ? 'Success' : (mission.launch_success === false ? 'Failed' : 'Unknown') }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
