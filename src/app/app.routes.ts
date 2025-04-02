@@ -9,7 +9,7 @@ export const routes: Routes = [
       )
   },
   {
-    path: 'mission/id',
+    path: 'mission/:id',
     loadComponent: () =>
       import('./components/missiondetails/missiondetails.component').then(
         m => m.MissiondetailsComponent
